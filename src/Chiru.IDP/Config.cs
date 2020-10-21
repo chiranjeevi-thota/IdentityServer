@@ -29,8 +29,10 @@ namespace Chiru.IDP
 				new Client
 				{
 					ClientName = "Image Gallery",
-					ClientId = "imageGalleryClient",
+					ClientId = "imagegalleryclient",
 					AllowedGrantTypes = GrantTypes.Code,
+					RequirePkce = true, // This should be enabled default
+					RequireConsent = true,
 					RedirectUris = new List<string>()
 					{
 						"https://localhost:44389/signin-oidc"
