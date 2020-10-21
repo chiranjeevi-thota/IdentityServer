@@ -4,6 +4,7 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityServer4;
 
 namespace Chiru.IDP
 {
@@ -24,6 +25,26 @@ namespace Chiru.IDP
 
 		public static IEnumerable<Client> Clients =>
 			new Client[]
-			{ };
+			{
+				new Client
+				{
+					ClientName = "Image Gallery",
+					ClientId = "imageGalleryClient",
+					AllowedGrantTypes = GrantTypes.Code,
+					RedirectUris = new List<string>()
+					{
+						"https://localhost:44389/signin-oidc"
+					},
+					AllowedScopes =
+					{
+						IdentityServerConstants.StandardScopes.OpenId,
+						IdentityServerConstants.StandardScopes.Profile
+					},
+					ClientSecrets =
+					{
+						new Secret("secret".Sha256())
+					}
+				}
+			};
 	}
 }
