@@ -7,23 +7,23 @@ using System.Collections.Generic;
 
 namespace Chiru.IDP
 {
-    public static class Config
-    {
-        // Identity resources maps to scopes that give identity related information
-	    public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[]
-            { 
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
-            };
+	public static class Config
+	{
+		// Identity resources maps to scopes that give identity related information
+		public static IEnumerable<IdentityResource> IdentityResources =>
+			new IdentityResource[]
+			{
+				new IdentityResources.OpenId(),
+				new IdentityResources.Profile()
+			};
 
-        // API scopes give API related information
-	    public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
-            { };
+		// API scopes give API related information
+		public static IEnumerable<ApiScope> ApiScopes =>
+			new ApiScope[]
+			{ };
 
-        public static IEnumerable<Client> Clients =>
-            new Client[] 
-            { };
-    }
+		public static IEnumerable<Client> Clients =>
+			new Client[]
+			{ };
+	}
 }
