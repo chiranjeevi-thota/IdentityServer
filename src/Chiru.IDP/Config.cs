@@ -9,13 +9,16 @@ namespace Chiru.IDP
 {
     public static class Config
     {
-        public static IEnumerable<IdentityResource> IdentityResources =>
+        // Identity resources maps to scopes that give identity related information
+	    public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             { 
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
             };
 
-        public static IEnumerable<ApiScope> ApiScopes =>
+        // API scopes give API related information
+	    public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             { };
 
