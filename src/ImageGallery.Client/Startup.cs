@@ -51,6 +51,7 @@ namespace ImageGallery.Client
 					options.Scope.Add("profile"); // Requested by default by this middle ware
 					options.SaveTokens = true;
 					options.ClientSecret = "secret";
+					options.GetClaimsFromUserInfoEndpoint = true;
 				});
 
 		}
