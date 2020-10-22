@@ -16,7 +16,11 @@ namespace Chiru.IDP
 			{
 				new IdentityResources.OpenId(),
 				new IdentityResources.Profile(),
-				new IdentityResources.Address()
+				new IdentityResources.Address(),
+				new IdentityResource(
+					"roles", // scope name
+					"Your role(s)", // display name
+					new List<string>{"role"}) 
 			};
 
 		// API scopes give API related information
@@ -46,7 +50,9 @@ namespace Chiru.IDP
 					{
 						IdentityServerConstants.StandardScopes.OpenId,
 						IdentityServerConstants.StandardScopes.Profile,
-						IdentityServerConstants.StandardScopes.Address
+						IdentityServerConstants.StandardScopes.Address,
+						"roles"
+						
 					},
 					ClientSecrets =
 					{
