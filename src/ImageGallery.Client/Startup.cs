@@ -50,8 +50,12 @@ namespace ImageGallery.Client
 					options.ClientId = "imagegalleryclient";
 					options.ResponseType = "code";
 					options.UsePkce = true;  // This should be enabled default
+					
 					options.Scope.Add("openid"); // Requested by default by this middle ware
 					options.Scope.Add("profile"); // Requested by default by this middle ware
+					options.Scope.Add("address"); // Address Claim is not returned by default,
+												// these claims has to be explicitly asked to return from userinfo endpoint
+
 					// options.ClaimActions.Remove("nbf"); // This method tells the middle ware that "remove/exclude" this claim from filtering out
 					options.ClaimActions.DeleteClaim("sid");
 					options.ClaimActions.DeleteClaim("idp");
