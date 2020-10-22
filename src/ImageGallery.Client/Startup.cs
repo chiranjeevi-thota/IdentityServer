@@ -63,12 +63,19 @@ namespace ImageGallery.Client
 					options.Scope.Add("profile"); // Requested by default by this middle ware
 					options.Scope.Add("address"); // Address Claim is not returned by default,
 												// these claims has to be explicitly asked to return from userinfo endpoint
+					options.Scope.Add("roles");
 
 					// options.ClaimActions.Remove("nbf"); // This method tells the middle ware that "remove/exclude" this claim from filtering out
 					options.ClaimActions.DeleteClaim("sid");
 					options.ClaimActions.DeleteClaim("idp");
 					options.ClaimActions.DeleteClaim("s_hash");
 					options.ClaimActions.DeleteClaim("auth_time");
+
+					options.ClaimActions.MapUniqueJsonKey("role", "role"); 
+					// Just by enabling this, middle ware extracts the claim from access token
+					// Note: For address claim we didn't wanted the middle ware by default to get-it. As we need update information from UserInfoEndpoint
+					// we used the IDP client for that.
+
 					options.SaveTokens = true;
 					options.ClientSecret = "secret";
 					options.GetClaimsFromUserInfoEndpoint = true;
