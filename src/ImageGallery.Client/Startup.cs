@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
@@ -17,6 +18,7 @@ namespace ImageGallery.Client
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 		}
 
 		// This method gets called by the runtime. Use this method to add services to the container.
