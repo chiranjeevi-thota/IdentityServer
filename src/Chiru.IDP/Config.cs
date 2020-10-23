@@ -20,13 +20,15 @@ namespace Chiru.IDP
 				new IdentityResource(
 					"roles", // scope name
 					"Your role(s)", // display name
-					new List<string>{"role"}) 
+					new List<string>{"role"})
 			};
 
 		// API scopes give API related information
 		public static IEnumerable<ApiScope> ApiScopes =>
 			new ApiScope[]
-			{ };
+			{
+				new ApiScope("imagegalleryapi", "Image Gallery API")
+			};
 
 		public static IEnumerable<Client> Clients =>
 			new Client[]
@@ -51,8 +53,9 @@ namespace Chiru.IDP
 						IdentityServerConstants.StandardScopes.OpenId,
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Address,
-						"roles"
-						
+						"roles",
+						"imagegalleryapi"
+
 					},
 					ClientSecrets =
 					{
