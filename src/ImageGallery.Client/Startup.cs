@@ -69,6 +69,7 @@ namespace ImageGallery.Client
 					options.Scope.Add("address"); // Address Claim is not returned by default,
 												// these claims has to be explicitly asked to return from userinfo endpoint
 					options.Scope.Add("roles");
+					options.Scope.Add("imagegalleryapi");
 
 					// options.ClaimActions.Remove("nbf"); // This method tells the middle ware that "remove/exclude" this claim from filtering out
 					options.ClaimActions.DeleteClaim("sid");
