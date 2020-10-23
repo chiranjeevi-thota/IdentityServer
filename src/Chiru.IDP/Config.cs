@@ -4,6 +4,7 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityModel;
 using IdentityServer4;
 
 namespace Chiru.IDP
@@ -29,6 +30,24 @@ namespace Chiru.IDP
 			{
 				new ApiScope("imagegalleryapi", "Image Gallery API")
 			};
+
+		// https://stackoverflow.com/questions/62930426/missing-aud-claim-in-access-token
+		public static IEnumerable<ApiResource> ApiResources =>
+			new ApiResource[]
+			{
+				new ApiResource("imagegalleryapi")
+				{
+					UserClaims =
+					{
+						JwtClaimTypes.Audience
+					},
+					Scopes = new List<string>()
+					{
+						"imagegalleryapi"
+					}
+				}
+			};
+
 
 		public static IEnumerable<Client> Clients =>
 			new Client[]
