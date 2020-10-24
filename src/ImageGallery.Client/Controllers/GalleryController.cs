@@ -197,7 +197,8 @@ namespace ImageGallery.Client.Controllers
         }
 
         // [Authorize(Roles = "PayingUser", "abc", "def", etc...)]
-        [Authorize(Roles = "PayingUser")]
+        // [Authorize(Roles = "PayingUser")]
+        [Authorize(Policy = "CanOrderFrame")]
         public async Task<IActionResult> OrderFrame()
         {
 	        var idpClient = _httpClientFactory.CreateClient("IDPClient");
