@@ -35,20 +35,25 @@ namespace ImageGallery.Client.Controllers
 
             var httpClient = _httpClientFactory.CreateClient("APIClient");
 
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                "/api/images/");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/images/");
             
-            var response = await httpClient.SendAsync(
-                request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+	            using (var responseStream = await response.Content.ReadAsStreamAsync())
+	            {
+		            return View(new GalleryIndexViewModel(await JsonSerializer.DeserializeAsync<List<Image>>(responseStream)));
+	            }
+            }
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized || 
+                     response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+	            return RedirectToAction("AccessDenied", "Authorization");
+            }
 
-            using (var responseStream = await response.Content.ReadAsStreamAsync())
-            {   
-                return View(new GalleryIndexViewModel(
-                    await JsonSerializer.DeserializeAsync<List<Image>>(responseStream)));
-            }             
+            throw new Exception("Problem accessing the API");
         }
 
         public async Task<IActionResult> EditImage(Guid id)
