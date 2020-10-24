@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ImageGallery.API.Controllers
 {
-    [Route("api/images")]
+    // Notes:
+    // User at the level of API is constructed from AccessToken
+    // In Client User at the level of API is constructed from Identity Token
+	
+	[Route("api/images")]
     [ApiController]
     [Authorize]
     public class ImagesController : ControllerBase
@@ -35,8 +40,11 @@ namespace ImageGallery.API.Controllers
         [HttpGet()]
         public IActionResult GetImages()
         {
-            // get from repo
-            var imagesFromRepo = _galleryRepository.GetImages();
+	        // User at the level of API is constructed from AccessToken
+            var ownerId = User.Claims.FirstOrDefault(_ => _.Type == "sub")?.Value;
+	        
+	        // get from repo
+            var imagesFromRepo = _galleryRepository.GetImages(ownerId);
 
             // map to model
             var imagesToReturn = _mapper.Map<IEnumerable<Model.Image>>(imagesFromRepo);
