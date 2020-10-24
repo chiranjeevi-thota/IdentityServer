@@ -31,6 +31,21 @@ namespace ImageGallery.Client
 			services.AddControllersWithViews()
 				 .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
+			services.AddAuthorization(authorizationOptions =>
+			{
+				authorizationOptions.AddPolicy(
+				"CanOrderFrame",
+				policyBuilder =>
+				{
+					policyBuilder.RequireAuthenticatedUser();
+					policyBuilder.RequireClaim("country", "be"); // policyBuilder.RequireClaim("country", "be", "nl", "xyz", etc...);
+					policyBuilder.RequireClaim("subscriptionlevel", "PayingUser");
+
+					// You can also add required roles for policy builders
+					// policyBuilder.RequireRole()
+				});
+			});
+
 			services.AddHttpContextAccessor();
 
 			services.AddTransient<BearerTokenHandler>();
@@ -76,13 +91,19 @@ namespace ImageGallery.Client
 					options.Scope.Add("roles");
 					options.Scope.Add("imagegalleryapi");
 
+					options.Scope.Add("country");
+					options.Scope.Add("subscriptionlevel");
+
 					// options.ClaimActions.Remove("nbf"); // This method tells the middle ware that "remove/exclude" this claim from filtering out
 					options.ClaimActions.DeleteClaim("sid");
 					options.ClaimActions.DeleteClaim("idp");
 					options.ClaimActions.DeleteClaim("s_hash");
 					options.ClaimActions.DeleteClaim("auth_time");
 
-					options.ClaimActions.MapUniqueJsonKey("role", "role"); 
+					options.ClaimActions.MapUniqueJsonKey("role", "role");
+					options.ClaimActions.MapUniqueJsonKey("country", "country");
+					options.ClaimActions.MapUniqueJsonKey("subscriptionlevel", "subscriptionlevel");
+
 					// Just by enabling this, middle ware extracts the claim from access token
 					// Note: For address claim we didn't wanted the middle ware by default to get-it. As we need update information from UserInfoEndpoint
 					// we used the IDP client for that.
