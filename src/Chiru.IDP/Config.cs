@@ -28,7 +28,7 @@ namespace Chiru.IDP
 		public static IEnumerable<ApiScope> ApiScopes =>
 			new ApiScope[]
 			{
-				new ApiScope("imagegalleryapi", "Image Gallery API")
+				new ApiScope("imagegalleryapi", "Image Gallery API", new List<string> {"role"})
 			};
 
 		// https://stackoverflow.com/questions/62930426/missing-aud-claim-in-access-token
