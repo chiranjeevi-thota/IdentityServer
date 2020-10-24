@@ -10,10 +10,10 @@ namespace ImageGallery.API.Authorization
 {
     public class MustOwnImageHandler : AuthorizationHandler<MustOwnImageRequirement>
     {
-	    private readonly HttpContextAccessor _httpContextAccessor;
+	    private readonly IHttpContextAccessor _httpContextAccessor;
 	    private readonly IGalleryRepository _galleryRepository;
 		
-		public MustOwnImageHandler(HttpContextAccessor httpContextAccessor, IGalleryRepository galleryRepository)
+		public MustOwnImageHandler(IHttpContextAccessor httpContextAccessor, IGalleryRepository galleryRepository)
 	    {
 		    _httpContextAccessor = httpContextAccessor;
 		    _galleryRepository = galleryRepository;
