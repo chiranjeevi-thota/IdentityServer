@@ -21,7 +21,17 @@ namespace Chiru.IDP
 				new IdentityResource(
 					"roles", // scope name
 					"Your role(s)", // display name
-					new List<string>{"role"})
+					new List<string>{"role"}),
+
+				new IdentityResource(
+					"country",
+					"The country you are living in",
+					new List<string>() {"country"}),
+
+				new IdentityResource(
+					"subscriptionlevel",
+					"Your subscription level",
+					new List<string>() {"subscriptionlevel"})
 			};
 
 		// API scopes give API related information
@@ -73,8 +83,9 @@ namespace Chiru.IDP
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Address,
 						"roles",
-						"imagegalleryapi"
-
+						"imagegalleryapi",
+						"country",
+						"subscriptionlevel"
 					},
 					ClientSecrets =
 					{
