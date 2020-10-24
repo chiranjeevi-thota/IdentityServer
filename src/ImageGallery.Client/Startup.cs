@@ -92,7 +92,9 @@ namespace ImageGallery.Client
 					options.Scope.Add("imagegalleryapi");
 
 					options.Scope.Add("country");
-					options.Scope.Add("subscriptionlevel");
+					options.Scope.Add("subscriptionlevel"); 
+
+					options.Scope.Add("offline_access");// Here the middle ware stores refresh token used next time to get the access token
 
 					// options.ClaimActions.Remove("nbf"); // This method tells the middle ware that "remove/exclude" this claim from filtering out
 					options.ClaimActions.DeleteClaim("sid");

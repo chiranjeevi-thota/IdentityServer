@@ -21,6 +21,10 @@ namespace ImageGallery.Client.HttpHandlers
 	    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 	    {
 			var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+			
+			// Just for understanding
+			var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+			
 			if (!string.IsNullOrWhiteSpace(accessToken))
 			{
 				request.SetBearerToken(accessToken);

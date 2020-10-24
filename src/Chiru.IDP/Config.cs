@@ -64,6 +64,11 @@ namespace Chiru.IDP
 			{
 				new Client
 				{
+					AccessTokenLifetime = 120,
+					AllowOfflineAccess = true, // Supports refresh tokens
+					// AbsoluteRefreshTokenLifetime = 30days
+					// RefreshTokenExpiration = TokenExpiration.Sliding,
+					UpdateAccessTokenClaimsOnRefresh = true,
 					ClientName = "Image Gallery",
 					ClientId = "imagegalleryclient",
 					AllowedGrantTypes = GrantTypes.Code,
