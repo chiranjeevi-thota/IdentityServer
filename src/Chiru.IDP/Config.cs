@@ -54,7 +54,8 @@ namespace Chiru.IDP
 					Scopes = new List<string>()
 					{
 						"imagegalleryapi"
-					}
+					},
+					ApiSecrets = {new Secret("apisecret".Sha256())}
 				}
 			};
 
@@ -64,6 +65,8 @@ namespace Chiru.IDP
 			{
 				new Client
 				{
+					AccessTokenType = AccessTokenType.Reference,
+
 					AccessTokenLifetime = 120,
 					AllowOfflineAccess = true, // Supports refresh tokens
 					// AbsoluteRefreshTokenLifetime = 30days
